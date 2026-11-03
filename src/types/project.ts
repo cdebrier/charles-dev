@@ -37,13 +37,18 @@ export type ProjectThemePattern =
 export interface ProjectTheme {
   accentColor: string;
   accentGlow: string;
-  surfaceTint: string;
+  surfaceBg: string;
   surfaceBorder: string;
   badgeBg: string;
   badgeText: string;
   buttonBg: string;
   buttonText: string;
   pattern: ProjectThemePattern;
+  logoUrl?: string;
+  orgBadge?: string;
+  metricBadge?: string;
+  metrics?: { label: string; value: string }[];
+  accentBorderHover?: string;
 }
 
 export interface Project {
