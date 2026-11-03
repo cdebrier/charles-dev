@@ -34,11 +34,11 @@ export function ProjectFilter({
   const inputRef = searchInputRef ?? fallbackRef;
 
   return (
-    <div className="mx-auto max-w-6xl px-4 py-3 sm:px-6">
-      <div className="surface-card flex flex-col gap-3 rounded-2xl p-3 sm:flex-row sm:items-center sm:justify-between sm:p-3.5">
-        {/* Category Filter Pills */}
+    <div className="mx-auto max-w-5xl px-4 pb-6 sm:px-6">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between border-b border-[var(--border-subtle)] pb-4">
+        {/* Category Filter Tabs */}
         <div
-          className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0"
+          className="flex items-center gap-1 overflow-x-auto pb-1 sm:pb-0"
           role="tablist"
           aria-label="Filtrer les projets par catégorie"
         >
@@ -53,18 +53,16 @@ export function ProjectFilter({
                 role="tab"
                 aria-selected={isSelected}
                 onClick={() => onSelectCategory(category)}
-                className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${
+                className={`inline-flex shrink-0 items-center gap-1.5 rounded-lg px-2.5 py-1 text-xs transition-colors cursor-pointer ${
                   isSelected
-                    ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] font-semibold shadow-xs'
-                    : 'bg-[var(--bg-pill)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
+                    ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] font-semibold'
+                    : 'text-[var(--text-secondary)] hover:text-[var(--text-primary)] hover:bg-[var(--bg-pill)]'
                 }`}
               >
                 <span>{category}</span>
                 <span
-                  className={`rounded-full px-1.5 py-0.2 font-mono-code text-[10px] ${
-                    isSelected
-                      ? 'bg-[var(--bg-canvas)]/25 text-[var(--bg-canvas)]'
-                      : 'bg-[var(--bg-surface-elevated)] text-[var(--text-muted)]'
+                  className={`font-mono-code text-[10px] ${
+                    isSelected ? 'opacity-70' : 'text-[var(--text-muted)]'
                   }`}
                 >
                   {count}
@@ -74,19 +72,19 @@ export function ProjectFilter({
           })}
         </div>
 
-        {/* Fast Search Input */}
-        <div className="relative flex items-center sm:w-72">
-          <Search className="pointer-events-none absolute left-3 h-4 w-4 text-[var(--text-muted)]" />
+        {/* Minimal Search Input */}
+        <div className="relative flex items-center sm:w-60">
+          <Search className="pointer-events-none absolute left-2.5 h-3.5 w-3.5 text-[var(--text-muted)]" />
           <input
             ref={inputRef}
             type="search"
             value={searchQuery}
             onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Filtrer (stack, nom, tag)..."
-            aria-label="Rechercher un projet ou une technologie"
-            className="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] py-2 pr-14 pl-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--border-strong)] focus:outline-none"
+            placeholder="Rechercher..."
+            aria-label="Rechercher un projet"
+            className="w-full rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] py-1.5 pr-8 pl-8 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--border-strong)] focus:outline-none"
           />
-          {searchQuery ? (
+          {searchQuery && (
             <button
               type="button"
               onClick={() => {
@@ -94,14 +92,10 @@ export function ProjectFilter({
                 inputRef.current?.focus();
               }}
               aria-label="Effacer la recherche"
-              className="absolute right-2.5 rounded-md p-1 text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
+              className="absolute right-2 text-[var(--text-muted)] hover:text-[var(--text-primary)] cursor-pointer"
             >
-              <X className="h-3.5 w-3.5" />
+              <X className="h-3 w-3" />
             </button>
-          ) : (
-            <kbd className="pointer-events-none absolute right-2.5 rounded border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] px-1.5 py-0.5 font-mono-code text-[10px] text-[var(--text-muted)]">
-              /
-            </kbd>
           )}
         </div>
       </div>

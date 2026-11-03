@@ -1,4 +1,3 @@
-import { Laptop, Smartphone, Terminal } from 'lucide-react';
 import type { ProfileInfo } from '../types/project';
 
 interface FooterProps {
@@ -7,33 +6,14 @@ interface FooterProps {
 
 export function Footer({ profile }: FooterProps) {
   return (
-    <footer className="mt-12 border-t border-[var(--border-subtle)] bg-[var(--bg-surface)] py-8">
-      <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="flex flex-col justify-between gap-6 md:flex-row md:items-center">
-          {/* Brand & Copyright */}
-          <div className="flex items-center gap-3">
-            <span className="flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border-strong)] bg-[var(--bg-pill)] text-[var(--text-primary)]">
-              <Terminal className="h-4 w-4" />
-            </span>
-            <div>
-              <p className="font-display text-sm font-semibold text-[var(--text-primary)]">
-                {profile.name} · <span className="text-[var(--text-muted)] font-normal">{profile.handle}</span>
-              </p>
-              <p className="font-mono-code text-xs text-[var(--text-muted)]">
-                Architecture Swiss High-Craft · React 19, TypeScript, Tailwind &amp; Vite
-              </p>
-            </div>
+    <footer className="mt-16 border-t border-[var(--border-subtle)] py-8">
+      <div className="mx-auto max-w-5xl px-4 sm:px-6">
+        <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center text-xs text-[var(--text-muted)] font-mono-code">
+          <div>
+            {profile.name} · {new Date().getFullYear()}
           </div>
-
-          {/* PWA Web App Tip */}
-          <div className="flex flex-wrap items-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-3.5 py-2 text-xs text-[var(--text-secondary)]">
-            <Smartphone className="h-4 w-4 text-[var(--text-primary)] shrink-0" />
-            <Laptop className="h-4 w-4 text-[var(--text-primary)] shrink-0" />
-            <span>
-              <strong className="text-[var(--text-primary)]">Astuce PWA :</strong> Installez{' '}
-              <code className="font-mono-code text-[var(--text-primary)] font-semibold">charles.dev</code> sur votre écran
-              d&apos;accueil iOS ou dans le Dock macOS (Partager → Ajouter au Dock).
-            </span>
+          <div>
+            Dock macOS &amp; iOS PWA supporté
           </div>
         </div>
       </div>

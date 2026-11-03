@@ -22,11 +22,6 @@ export function App() {
 
   const searchInputRef = useRef<HTMLInputElement | null>(null);
 
-  const liveProjects = useMemo(
-    () => projects.filter((p) => p.status === 'Live' && Boolean(p.url)),
-    [projects]
-  );
-
   const filteredProjects = useMemo(
     () =>
       projectService.filterProjects(projects, selectedCategory, searchQuery),
@@ -85,7 +80,6 @@ export function App() {
       />
 
       <Header
-        liveProjects={liveProjects}
         onOpenCommandPalette={() => setIsCommandPaletteOpen(true)}
       />
 
@@ -93,16 +87,16 @@ export function App() {
         <Hero profile={profile} projects={projects} />
 
         <section aria-labelledby="launcher-heading" className="pb-12">
-          <div className="mx-auto max-w-6xl px-4 pt-2 sm:px-6">
+          <div className="mx-auto max-w-5xl px-4 pb-2 sm:px-6">
             <div className="flex items-center justify-between">
               <h2
                 id="launcher-heading"
-                className="font-mono-code text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]"
+                className="font-mono-code text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]"
               >
-                App Launcher &amp; Projets ({filteredProjects.length})
+                Applications &amp; Projets
               </h2>
               <span className="font-mono-code text-[11px] text-[var(--text-muted)] hidden sm:inline">
-                Cliquez sur « Lancer l&apos;app » ou appuyez sur 1–5
+                Raccourcis 1–5
               </span>
             </div>
           </div>
@@ -116,10 +110,10 @@ export function App() {
             searchInputRef={searchInputRef}
           />
 
-          <div className="mx-auto max-w-6xl px-4 pt-2 sm:px-6">
+          <div className="mx-auto max-w-5xl px-4 pt-2 sm:px-6">
             {filteredProjects.length === 0 ? (
               <div className="surface-card flex flex-col items-center justify-center rounded-2xl p-12 text-center">
-                <FolderSearch className="h-10 w-10 text-cyan-500/70" />
+                <FolderSearch className="h-10 w-10 text-zinc-400" />
                 <h3 className="font-display mt-3 text-base font-semibold text-[var(--text-primary)]">
                   Aucun projet ne correspond à ces filtres
                 </h3>
@@ -132,14 +126,14 @@ export function App() {
                     setSelectedCategory('Tous');
                     setSearchQuery('');
                   }}
-                  className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[var(--text-primary)] px-3.5 py-2 text-xs font-semibold text-[var(--bg-canvas)] transition-opacity hover:opacity-90 cursor-pointer"
+                  className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[var(--text-primary)] px-3 py-1.5 text-xs font-medium text-[var(--bg-canvas)] transition-opacity hover:opacity-90 cursor-pointer"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
                   Réinitialiser les filtres
                 </button>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-4 md:grid-cols-6">
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
                 {filteredProjects.map((project) => (
                   <ProjectCard key={project.id} project={project} />
                 ))}
