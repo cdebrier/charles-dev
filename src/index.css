@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+:root {
+  /* Light and Dark raw tokens */
+  --bg-canvas-light: #f6f8fb;
+  --bg-canvas-dark: #070b12;
+
+  --bg-surface-light: rgba(255, 255, 255, 0.86);
+  --bg-surface-dark: rgba(13, 19, 31, 0.78);
+
+  --bg-surface-elevated-light: #ffffff;
+  --bg-surface-elevated-dark: #111927;
+
+  --bg-pill-light: #edf2f7;
+  --bg-pill-dark: rgba(30, 41, 59, 0.65);
+
+  --text-primary-light: #0b1120;
+  --text-primary-dark: #f1f5f9;
+
+  --text-secondary-light: #475569;
+  --text-secondary-dark: #94a3b8;
+
+  --text-muted-light: #64748b;
+  --text-muted-dark: #64748b;
+
+  --border-subtle-light: rgba(15, 23, 42, 0.09);
+  --border-subtle-dark: rgba(148, 163, 184, 0.12);
+
+  --border-strong-light: rgba(14, 165, 233, 0.35);
+  --border-strong-dark: rgba(34, 211, 238, 0.35);
+
+  --accent-primary-light: #0284c7;
+  --accent-primary-dark: #22d3ee;
+
+  --accent-glow-light: rgba(2, 132, 199, 0.12);
+  --accent-glow-dark: rgba(34, 211, 238, 0.14);
+
+  /* Fallback assignments for browsers without light-dark() */
+  --bg-canvas: var(--bg-canvas-light);
+  --bg-surface: var(--bg-surface-light);
+  --bg-surface-elevated: var(--bg-surface-elevated-light);
+  --bg-pill: var(--bg-pill-light);
+  --text-primary: var(--text-primary-light);
+  --text-secondary: var(--text-secondary-light);
+  --text-muted: var(--text-muted-light);
+  --border-subtle: var(--border-subtle-light);
+  --border-strong: var(--border-strong-light);
+  --accent-primary: var(--accent-primary-light);
+  --accent-glow: var(--accent-glow-light);
+
+  @media (prefers-color-scheme: dark) {
+    --bg-canvas: var(--bg-canvas-dark);
+    --bg-surface: var(--bg-surface-dark);
+    --bg-surface-elevated: var(--bg-surface-elevated-dark);
+    --bg-pill: var(--bg-pill-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --text-muted: var(--text-muted-dark);
+    --border-subtle: var(--border-subtle-dark);
+    --border-strong: var(--border-strong-dark);
+    --accent-primary: var(--accent-primary-dark);
+    --accent-glow: var(--accent-glow-dark);
+  }
+
+  /* Modern CSS light-dark() automatic scheme resolution */
+  @supports (color: light-dark(white, black)) {
+    --bg-canvas: light-dark(var(--bg-canvas-light), var(--bg-canvas-dark));
+    --bg-surface: light-dark(var(--bg-surface-light), var(--bg-surface-dark));
+    --bg-surface-elevated: light-dark(var(--bg-surface-elevated-light), var(--bg-surface-elevated-dark));
+    --bg-pill: light-dark(var(--bg-pill-light), var(--bg-pill-dark));
+    --text-primary: light-dark(var(--text-primary-light), var(--text-primary-dark));
+    --text-secondary: light-dark(var(--text-secondary-light), var(--text-secondary-dark));
+    --text-muted: light-dark(var(--text-muted-light), var(--text-muted-dark));
+    --border-subtle: light-dark(var(--border-subtle-light), var(--border-subtle-dark));
+    --border-strong: light-dark(var(--border-strong-light), var(--border-strong-dark));
+    --accent-primary: light-dark(var(--accent-primary-light), var(--accent-primary-dark));
+    --accent-glow: light-dark(var(--accent-glow-light), var(--accent-glow-dark));
+  }
+
+  /* MANDATORY: Automatically adapt native UI to user system preferences */
+  color-scheme: light dark;
+  accent-color: var(--accent-primary);
+
+  /* Reflect <meta name="color-scheme"> override in CSS */
+  &:has(> head > meta[name="color-scheme"][content="dark"]) {
+    color-scheme: dark;
+    --bg-canvas: var(--bg-canvas-dark);
+    --bg-surface: var(--bg-surface-dark);
+    --bg-surface-elevated: var(--bg-surface-elevated-dark);
+    --bg-pill: var(--bg-pill-dark);
+    --text-primary: var(--text-primary-dark);
+    --text-secondary: var(--text-secondary-dark);
+    --text-muted: var(--text-muted-dark);
+    --border-subtle: var(--border-subtle-dark);
+    --border-strong: var(--border-strong-dark);
+    --accent-primary: var(--accent-primary-dark);
+    --accent-glow: var(--accent-glow-dark);
+  }
+
+  &:has(> head > meta[name="color-scheme"][content="light"]) {
+    color-scheme: light;
+    --bg-canvas: var(--bg-canvas-light);
+    --bg-surface: var(--bg-surface-light);
+    --bg-surface-elevated: var(--bg-surface-elevated-light);
+    --bg-pill: var(--bg-pill-light);
+    --text-primary: var(--text-primary-light);
+    --text-secondary: var(--text-secondary-light);
+    --text-muted: var(--text-muted-light);
+    --border-subtle: var(--border-subtle-light);
+    --border-strong: var(--border-strong-light);
+    --accent-primary: var(--accent-primary-light);
+    --accent-glow: var(--accent-glow-light);
+  }
+
+  font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  min-height: 100dvh;
+  margin: 0;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  background-image:
+    radial-gradient(circle at 15% 0%, var(--accent-glow), transparent 42%),
+    radial-gradient(circle at 85% 12%, rgba(56, 189, 248, 0.08), transparent 36%);
+}
+
+/* Precision grid background texture */
+.bg-telemetry-grid {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, var(--border-subtle) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--border-subtle) 1px, transparent 1px);
+  mask-image: radial-gradient(ellipse 80% 60% at 50% 0%, #000 55%, transparent 100%);
+}
+
+.font-display {
+  font-family: 'Space Grotesk', sans-serif;
+  letter-spacing: -0.025em;
+}
+
+.font-mono-code {
+  font-family: 'JetBrains Mono', monospace;
+}
+
+.surface-card {
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  backdrop-filter: blur(16px);
+  transition: transform 180ms cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 180ms ease,
+              box-shadow 180ms ease;
+}
+
+.surface-card:hover {
+  border-color: var(--border-strong);
+  box-shadow: 0 14px 34px -12px var(--accent-glow);
+}
+
+/* Native modal dialog rules from modern-web-guidance */
+dialog:modal {
+  overscroll-behavior: contain;
+}
+
+dialog::backdrop {
+  overflow: hidden;
+  overscroll-behavior: contain;
+  background-color: rgba(3, 7, 18, 0.65);
+  backdrop-filter: blur(6px);
+}

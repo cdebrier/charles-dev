@@ -1,0 +1,42 @@
+{
+  "name": "Charles.dev — App Launcher & Hub",
+  "short_name": "Charles.dev",
+  "description": "Portail personnel et lanceur d'applications de Charles De Brier (Ingénieur, Data Scientist & AI Engineer).",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#090d16",
+  "theme_color": "#090d16",
+  "categories": ["productivity", "developer", "utilities"],
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Lancer APPnea",
+      "short_name": "APPnea",
+      "description": "Ouvrir la PWA APPnea Club",
+      "url": "https://appnea.club",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "Lancer StreetFinder",
+      "short_name": "StreetFinder",
+      "description": "Ouvrir StreetFinder.be",
+      "url": "https://streetfinder.be",
+      "icons": [{ "src": "/icon.svg", "sizes": "192x192" }]
+    }
+  ]
+}
