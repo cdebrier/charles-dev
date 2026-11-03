@@ -1,4 +1,4 @@
-import { Activity, ArrowUpRight, Bike, Code2, Gauge } from 'lucide-react';
+import { ArrowUpRight, Bike, Code2 } from 'lucide-react';
 import type { Project } from '../../types/project';
 import { GitHubIcon } from '../BrandIcons';
 
@@ -10,100 +10,155 @@ export function TelraamCard({ project }: AppCardProps) {
   return (
     <article
       style={{
-        backgroundColor: '#0B0F14',
-        borderColor: 'rgba(90, 169, 255, 0.35)',
-        boxShadow: '0 10px 30px -10px rgba(11, 15, 20, 0.8)',
+        backgroundColor: '#f8fafc',
+        borderColor: '#0d9488',
+        boxShadow: '0 16px 40px -12px rgba(13, 148, 136, 0.2)',
       }}
-      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl border transition-all duration-200 hover:border-[#5AA9FF]/70 flex flex-col justify-between p-6"
+      className="group relative col-span-1 md:col-span-2 overflow-hidden rounded-3xl border-2 transition-all duration-200 hover:shadow-xl flex flex-col justify-between text-slate-900"
     >
-      {/* Mobility Cobalt Ambient Glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-16 h-48 w-48 rounded-full bg-[#5AA9FF]/15 blur-3xl"
-      />
-      <div className="absolute inset-x-0 top-0 h-1 bg-[#5AA9FF] opacity-80" />
+      {/* Top Scientific Mint Stripe */}
+      <div className="absolute inset-x-0 top-0 h-1.5 bg-[#0d9488]" />
 
-      <div className="relative z-10">
-        {/* Header Row */}
-        <div className="flex items-start justify-between gap-3">
-          <div className="flex items-center gap-3">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-[#5AA9FF]/40 bg-[#5AA9FF]/15 text-[#5AA9FF] shadow-sm">
-              <Bike className="h-6 w-6" />
-            </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h3 className="font-display text-xl font-bold tracking-tight text-white">
-                  {project.title}
-                </h3>
-                <kbd className="rounded border border-[#5AA9FF]/30 bg-[#5AA9FF]/10 px-1.5 py-0.5 font-mono-code text-[10px] text-[#5AA9FF]">
-                  #5
-                </kbd>
+      <div className="p-6">
+        {/* Real Telraam Scientific Mobility Header from Screenshot */}
+        <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-xs">
+          <div className="flex items-start justify-between border-b border-slate-100 pb-3">
+            <div className="flex items-center gap-2.5">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-teal-50 border border-teal-200 text-[#0d9488]">
+                <Bike className="h-5 w-5" />
               </div>
-              <p className="font-mono-code text-xs text-zinc-400">
-                {project.categoryLabel}
-              </p>
+              <div>
+                <div className="text-[10px] font-mono-code font-bold uppercase tracking-wider text-[#0d9488]">
+                  Observatoire Citoyen · Rixensart
+                </div>
+                <div className="font-display text-base font-bold text-slate-900">
+                  Comptages Telraam S2
+                </div>
+              </div>
+            </div>
+
+            {/* Mode selection pills matching screenshot */}
+            <div className="flex items-center gap-1 rounded-full border border-slate-200 bg-slate-50 p-1 font-mono-code text-[9px]">
+              <span className="px-2 py-0.5 text-slate-600">Voitures</span>
+              <span className="px-2 py-0.5 text-slate-600">Vélos</span>
+              <span className="rounded-full bg-[#0d9488] text-white px-2 py-0.5 font-bold shadow-2xs">
+                Piétons
+              </span>
             </div>
           </div>
 
-          <div className="flex flex-col items-end gap-1">
-            <span className="inline-flex items-center gap-1.5 rounded-full border border-sky-500/35 bg-sky-500/15 px-2.5 py-0.5 font-mono-code text-[10px] font-semibold text-sky-400 uppercase tracking-wider">
-              <span className="h-1.5 w-1.5 rounded-full bg-sky-400" />
-              En développement
-            </span>
-            <span className="font-mono-code text-[10px] text-[#93C5FD] font-medium">
-              Commune de Rixensart
-            </span>
+          {/* Ridgeplot / Density Curves Simulation directly from Screenshot */}
+          <div className="mt-3.5 grid grid-cols-1 sm:grid-cols-12 gap-3">
+            {/* Left Insight Box */}
+            <div className="sm:col-span-5 rounded-xl border border-slate-200 bg-slate-50/70 p-3 text-xs font-mono-code flex flex-col justify-between">
+              <div>
+                <div className="text-[9px] font-bold uppercase tracking-wider text-teal-700">
+                  Journée type · Vélos
+                </div>
+                <div className="mt-1 font-display text-xs font-bold text-slate-900 leading-snug">
+                  Les vélos suivent le même rythme
+                </div>
+                <p className="mt-1 text-[10px] text-slate-600 leading-relaxed font-sans">
+                  Pics à 8h-9h et 16h-17h. 809 vélos/j de semaine sur 12 rues.
+                </p>
+              </div>
+              <div className="mt-2 text-[9px] text-slate-500">
+                Nov. 2024 · 12 capteurs
+              </div>
+            </div>
+
+            {/* Right Ridgeplot Density Waves */}
+            <div className="sm:col-span-7 rounded-xl border border-slate-100 bg-white p-2.5 font-mono-code text-[10px]">
+              <div className="space-y-1.5">
+                {/* Ch. La Hulpe */}
+                <div className="flex items-center justify-between gap-1 text-[9px]">
+                  <span className="text-slate-700 w-20 truncate">Ch. La Hulpe</span>
+                  <div className="flex-1 h-3 flex items-center px-1">
+                    <svg viewBox="0 0 100 16" className="w-full h-full overflow-visible">
+                      <path
+                        d="M 0 14 Q 25 14 35 3 Q 45 14 65 14 Q 75 4 85 4 Q 95 14 100 14"
+                        fill="rgba(45, 212, 191, 0.25)"
+                        stroke="#0d9488"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </div>
+                  <span className="font-bold text-[#0d9488] shrink-0">285 / j</span>
+                </div>
+
+                {/* Rue de la Gare */}
+                <div className="flex items-center justify-between gap-1 text-[9px]">
+                  <span className="text-slate-700 w-20 truncate">Rue de la Gare</span>
+                  <div className="flex-1 h-3 flex items-center px-1">
+                    <svg viewBox="0 0 100 16" className="w-full h-full overflow-visible">
+                      <path
+                        d="M 0 14 Q 20 14 30 7 Q 50 14 70 8 Q 80 2 90 8 Q 96 14 100 14"
+                        fill="rgba(45, 212, 191, 0.25)"
+                        stroke="#0d9488"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </div>
+                  <span className="font-bold text-[#0d9488] shrink-0">202 / j</span>
+                </div>
+
+                {/* Place Communale */}
+                <div className="flex items-center justify-between gap-1 text-[9px]">
+                  <span className="text-slate-700 w-20 truncate">Pl. Communale</span>
+                  <div className="flex-1 h-3 flex items-center px-1">
+                    <svg viewBox="0 0 100 16" className="w-full h-full overflow-visible">
+                      <path
+                        d="M 0 14 Q 30 14 40 4 Q 55 12 70 4 Q 85 14 100 14"
+                        fill="rgba(45, 212, 191, 0.25)"
+                        stroke="#0d9488"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </div>
+                  <span className="font-bold text-[#0d9488] shrink-0">130 / j</span>
+                </div>
+
+                {/* Av. Albert 1er */}
+                <div className="flex items-center justify-between gap-1 text-[9px]">
+                  <span className="text-slate-700 w-20 truncate">Av. Albert 1er</span>
+                  <div className="flex-1 h-3 flex items-center px-1">
+                    <svg viewBox="0 0 100 16" className="w-full h-full overflow-visible">
+                      <path
+                        d="M 0 14 Q 20 14 30 9 Q 50 14 65 5 Q 85 14 100 14"
+                        fill="rgba(45, 212, 191, 0.25)"
+                        stroke="#0d9488"
+                        strokeWidth="1.5"
+                      />
+                    </svg>
+                  </div>
+                  <span className="font-bold text-[#0d9488] shrink-0">109 / j</span>
+                </div>
+              </div>
+
+              {/* Time axis */}
+              <div className="mt-2 flex justify-between text-[8px] text-slate-500 border-t border-slate-200 pt-1">
+                <span>6 h</span>
+                <span>8 h (Pic)</span>
+                <span>12 h</span>
+                <span>16 h (Pic)</span>
+                <span>18 h</span>
+              </div>
+            </div>
           </div>
         </div>
 
-        {/* Traffic Sensor Telemetry & V85 Speed Specimen */}
-        <div className="mt-5 rounded-2xl border border-white/10 bg-[#121821] p-3.5 shadow-inner font-mono-code">
-          <div className="flex items-center justify-between border-b border-white/10 pb-2 text-[10px]">
-            <span className="flex items-center gap-1.5 text-zinc-300 font-semibold">
-              <Activity className="h-3.5 w-3.5 text-[#5AA9FF]" />
-              Capteurs Telraam S2
-            </span>
-            <span className="text-emerald-400 font-bold">27M Détections</span>
-          </div>
-
-          {/* Multimodal Modal Split Bar */}
-          <div className="mt-2.5">
-            <div className="flex justify-between text-[10px] text-zinc-400 mb-1">
-              <span>🚶 12% Piétons</span>
-              <span>🚲 18% Vélos</span>
-              <span>🚗 70% Autos</span>
-            </div>
-            <div className="h-2 w-full overflow-hidden rounded-full bg-zinc-800 flex">
-              <div style={{ width: '12%' }} className="bg-emerald-400" title="12% Piétons" />
-              <div style={{ width: '18%' }} className="bg-[#5AA9FF]" title="18% Vélos" />
-              <div style={{ width: '70%' }} className="bg-zinc-600" title="70% Voitures" />
-            </div>
-          </div>
-
-          {/* V85 Speed Radar Gauge */}
-          <div className="mt-3 flex items-center justify-between rounded-xl bg-black/40 px-3 py-2 border border-white/5 text-[10px]">
-            <div className="flex items-center gap-1.5 text-zinc-300">
-              <Gauge className="h-3.5 w-3.5 text-emerald-400" />
-              <span>Vitesse réelle V85 :</span>
-            </div>
-            <span className="font-bold text-white bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-md border border-emerald-500/30">
-              48 km/h (Zone 50)
-            </span>
-          </div>
-        </div>
-
-        <p className="mt-4 text-sm leading-relaxed text-zinc-300">
+        <p className="mt-4 text-xs sm:text-sm leading-relaxed text-slate-700">
           {project.description}
         </p>
       </div>
 
-      {/* Bottom Area */}
-      <div className="mt-6 pt-4 border-t border-white/10">
-        <div className="flex flex-wrap gap-1.5 mb-4">
+      {/* Footer Area */}
+      <div className="p-6 pt-0 border-t border-slate-200 mt-2">
+        <div className="flex flex-wrap gap-1.5 my-3.5">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-white/10 bg-white/5 px-2 py-0.5 font-mono-code text-[11px] font-medium text-zinc-300"
+              className="rounded-md border border-slate-300 bg-slate-100 px-2 py-0.5 font-mono-code text-[11px] font-medium text-slate-700"
             >
               {tech}
             </span>
@@ -116,11 +171,11 @@ export function TelraamCard({ project }: AppCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[#5AA9FF]/40 bg-[#2563EB]/25 px-4 py-2.5 text-xs font-semibold text-[#93C5FD] transition-colors hover:bg-[#2563EB]/40"
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-[#0d9488] px-4 py-2.5 text-xs font-semibold text-white shadow-md shadow-[#0d9488]/20 transition-all hover:bg-[#0f766e] active:scale-[0.99]"
             >
               <Code2 className="h-4 w-4" />
-              <span>Explorer le projet (Dev)</span>
-              <ArrowUpRight className="h-4 w-4 ml-auto opacity-70" />
+              <span>Consulter l&apos;Observatoire (Dev)</span>
+              <ArrowUpRight className="h-4 w-4 ml-auto opacity-80" />
             </a>
           )}
 
@@ -130,7 +185,7 @@ export function TelraamCard({ project }: AppCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`Code source GitHub de ${project.title}`}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-white/10 bg-white/5 text-zinc-300 transition-colors hover:border-[#5AA9FF] hover:text-white"
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-slate-300 bg-white text-slate-700 transition-colors hover:border-[#0d9488] hover:text-[#0d9488]"
             >
               <GitHubIcon className="h-4 w-4" />
             </a>
