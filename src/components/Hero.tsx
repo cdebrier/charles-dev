@@ -1,4 +1,4 @@
-import { ArrowUpRight, Mail } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 import type { ProfileInfo, Project } from '../types/project';
 import { GitHubIcon, LinkedInIcon } from './BrandIcons';
 
@@ -49,13 +49,6 @@ export function Hero({ profile }: HeroProps) {
               <LinkedInIcon className="h-3.5 w-3.5" />
               <span>LinkedIn</span>
               <ArrowUpRight className="h-3 w-3 opacity-50" />
-            </a>
-            <a
-              href={profile.socials.email}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-3 py-1.5 text-xs font-medium text-[var(--text-primary)] transition-colors hover:border-[var(--border-strong)]"
-            >
-              <Mail className="h-3.5 w-3.5" />
-              <span>Contact</span>
             </a>
           </div>
         </div>

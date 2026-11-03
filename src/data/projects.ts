@@ -62,7 +62,6 @@ export const PROFILE_DATA: ProfileInfo = {
   socials: {
     github: 'https://github.com/cdebrier',
     linkedin: 'https://www.linkedin.com/in/charlesdebrier',
-    email: 'mailto:charlesdebrier@gmail.com',
   },
 };
 

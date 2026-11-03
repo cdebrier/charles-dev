@@ -66,8 +66,10 @@ export function VigilXLCard({ project }: AppCardProps) {
 
         <div className="flex items-center gap-2 shrink-0">
           <a
-            href="mailto:charlesdebrier@gmail.com?subject=Code%20VigilXL%20-%20Demande%20d'acc%C3%A8s%20recruteur"
-            title="Dépôt privé — Demander un accès invité au code"
+            href="https://www.linkedin.com/in/charlesdebrier"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="Dépôt privé — Demander un accès invité via LinkedIn"
             className="inline-flex items-center gap-1.5 rounded-lg border border-[#008784]/30 bg-teal-50 px-2.5 py-1 text-[11px] font-medium text-[#008784] hover:bg-teal-100 transition-colors cursor-pointer"
           >
             <Lock className="h-3 w-3 text-[#008784]" />

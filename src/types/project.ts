@@ -84,6 +84,6 @@ export interface ProfileInfo {
   socials: {
     github: string;
     linkedin: string;
-    email: string;
+    email?: string;
   };
 }
