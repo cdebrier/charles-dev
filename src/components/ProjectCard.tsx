@@ -1,62 +1,115 @@
+import { useState } from 'react';
 import { ArrowUpRight, Code2, Lock, Rocket, Sparkles } from 'lucide-react';
 import type { Project, ProjectStatus } from '../types/project';
 import { GitHubIcon } from './BrandIcons';
+import { ProjectBackgroundPattern } from './ProjectBackgroundPattern';
 import { ProjectIcon } from './ProjectIcon';
 
 interface ProjectCardProps {
   project: Project;
 }
 
-function getStatusBadgeStyle(status: ProjectStatus) {
+function getStatusBadgeStyle(status: ProjectStatus, accentColor?: string) {
   switch (status) {
     case 'Live':
       return {
         label: 'Live',
-        badgeClass:
-          'border-emerald-500/35 bg-emerald-500/12 text-emerald-500',
         dotClass: 'bg-emerald-500 animate-pulse',
+        style: accentColor
+          ? {
+              borderColor: `${accentColor}40`,
+              backgroundColor: `${accentColor}15`,
+              color: accentColor,
+            }
+          : undefined,
+        className: 'border-emerald-500/35 bg-emerald-500/12 text-emerald-500',
       };
     case 'Beta':
       return {
         label: 'En dév · Beta',
-        badgeClass:
-          'border-amber-500/35 bg-amber-500/12 text-amber-500',
         dotClass: 'bg-amber-500',
+        style: accentColor
+          ? {
+              borderColor: `${accentColor}40`,
+              backgroundColor: `${accentColor}15`,
+              color: accentColor,
+            }
+          : undefined,
+        className: 'border-amber-500/35 bg-amber-500/12 text-amber-500',
       };
     case 'Private/Dev':
       return {
         label: 'En développement',
-        badgeClass:
-          'border-sky-500/30 bg-sky-500/10 text-sky-400',
         dotClass: 'bg-sky-400',
+        style: accentColor
+          ? {
+              borderColor: `${accentColor}40`,
+              backgroundColor: `${accentColor}15`,
+              color: accentColor,
+            }
+          : undefined,
+        className: 'border-sky-500/30 bg-sky-500/10 text-sky-400',
       };
   }
 }
 
 export function ProjectCard({ project }: ProjectCardProps) {
-  const statusInfo = getStatusBadgeStyle(project.status);
+  const [isHovered, setIsHovered] = useState(false);
+  const theme = project.theme;
+  const statusInfo = getStatusBadgeStyle(project.status, theme?.accentColor);
   const isLive = Boolean(project.url);
+
+  // Dynamic card inline styling based on app's graphic charter
+  const cardStyle: React.CSSProperties = {
+    borderColor: isHovered && theme ? theme.surfaceBorder : undefined,
+    boxShadow: isHovered && theme ? `0 18px 40px -12px ${theme.accentGlow}` : undefined,
+    backgroundColor: theme ? `color-mix(in srgb, var(--bg-surface) 94%, ${theme.accentColor} 6%)` : undefined,
+  };
 
   return (
     <article
-      className={`surface-card group relative flex flex-col justify-between rounded-2xl p-5 sm:p-6 transition-all duration-200 hover:-translate-y-0.5 ${
+      style={cardStyle}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className={`surface-card group relative flex flex-col justify-between overflow-hidden rounded-2xl p-5 sm:p-6 transition-all duration-300 hover:-translate-y-1 ${
         project.featured ? 'md:col-span-3' : 'md:col-span-2'
       }`}
     >
-      {/* Top Glow Accent for Featured Live Apps */}
-      {project.featured && (
-        <div className="pointer-events-none absolute inset-x-8 top-0 h-px bg-gradient-to-r from-transparent via-cyan-400/60 to-transparent" />
+      {/* Background Graphic Pattern matching target app identity */}
+      {theme && (
+        <ProjectBackgroundPattern
+          pattern={theme.pattern}
+          accentColor={theme.accentColor}
+        />
       )}
 
-      <div>
+      {/* Top Header Subtle Accent Line */}
+      {theme && (
+        <div
+          style={{ backgroundColor: theme.accentColor }}
+          className="pointer-events-none absolute inset-x-0 top-0 h-0.5 opacity-40 transition-opacity duration-300 group-hover:opacity-100"
+        />
+      )}
+
+      <div className="relative z-10">
         {/* Card Header: Icon + Title + Category + Status Badge */}
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-3.5">
             <div
-              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition-transform duration-200 group-hover:scale-105 ${
-                isLive
-                  ? 'border-cyan-500/35 bg-cyan-500/12 text-cyan-400 shadow-sm shadow-cyan-500/10'
-                  : 'border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-secondary)]'
+              style={
+                theme
+                  ? {
+                      borderColor: `${theme.accentColor}50`,
+                      backgroundColor: `${theme.accentColor}18`,
+                      color: theme.accentColor,
+                    }
+                  : undefined
+              }
+              className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border transition-transform duration-300 group-hover:scale-105 ${
+                !theme &&
+                (isLive
+                  ? 'border-cyan-500/35 bg-cyan-500/12 text-cyan-400'
+                  : 'border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-secondary)]')
               }`}
             >
               <ProjectIcon name={project.icon} className="h-6 w-6" />
@@ -70,7 +123,7 @@ export function ProjectCard({ project }: ProjectCardProps) {
                 {project.shortcutIndex && (
                   <kbd
                     title={`Appuyez sur la touche ${project.shortcutIndex} pour ouvrir`}
-                    className="hidden rounded border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-1.5 py-0.5 font-mono-code text-[10px] text-[var(--text-muted)] sm:inline-block"
+                    className="hidden rounded border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] px-1.5 py-0.5 font-mono-code text-[10px] text-[var(--text-muted)] sm:inline-block"
                   >
                     #{project.shortcutIndex}
                   </kbd>
@@ -82,19 +135,38 @@ export function ProjectCard({ project }: ProjectCardProps) {
             </div>
           </div>
 
-          {/* Status Pill */}
+          {/* App-Colored Status Pill */}
           <span
-            className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono-code text-[11px] font-medium ${statusInfo.badgeClass}`}
+            style={statusInfo.style}
+            className={`inline-flex shrink-0 items-center gap-1.5 rounded-full border px-2.5 py-1 font-mono-code text-[11px] font-medium transition-colors ${
+              !statusInfo.style ? statusInfo.className : ''
+            }`}
           >
-            <span className={`h-1.5 w-1.5 rounded-full ${statusInfo.dotClass}`} />
+            <span
+              style={theme ? { backgroundColor: theme.accentColor } : undefined}
+              className={`h-1.5 w-1.5 rounded-full ${!theme ? statusInfo.dotClass : ''}`}
+            />
             {statusInfo.label}
           </span>
         </div>
 
         {/* Highlight Telemetry Strip */}
         {project.highlight && (
-          <div className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2.5 py-1 font-mono-code text-[11px] text-[var(--text-secondary)]">
-            <Sparkles className="h-3 w-3 text-cyan-500" />
+          <div
+            style={
+              theme
+                ? {
+                    borderColor: `${theme.accentColor}25`,
+                    backgroundColor: `${theme.accentColor}0a`,
+                  }
+                : undefined
+            }
+            className="mt-4 inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2.5 py-1 font-mono-code text-[11px] text-[var(--text-secondary)]"
+          >
+            <Sparkles
+              style={theme ? { color: theme.accentColor } : undefined}
+              className="h-3 w-3 text-cyan-500"
+            />
             <span>{project.highlight}</span>
           </div>
         )}
@@ -106,27 +178,36 @@ export function ProjectCard({ project }: ProjectCardProps) {
       </div>
 
       {/* Bottom Area: Tech Stack Tags + Action Bar */}
-      <div className="mt-5 pt-4 border-t border-[var(--border-subtle)]">
+      <div className="relative z-10 mt-5 pt-4 border-t border-[var(--border-subtle)]">
         {/* Tech Stack */}
         <div className="flex flex-wrap gap-1.5 mb-4" aria-label="Stack technique">
           {project.techStack.map((tech) => (
             <span
               key={tech}
-              className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2 py-0.5 font-mono-code text-[11px] font-medium text-[var(--text-secondary)]"
+              className="rounded-md border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] px-2 py-0.5 font-mono-code text-[11px] font-medium text-[var(--text-secondary)]"
             >
               {tech}
             </span>
           ))}
         </div>
 
-        {/* Action Buttons */}
+        {/* Action Buttons: Wearing the Target App's Brand Identity */}
         <div className="flex items-center gap-2.5">
           {project.url ? (
             <a
               href={project.url}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 shadow-sm shadow-cyan-500/20 transition-all hover:bg-cyan-400 active:scale-[0.99] sm:text-sm"
+              style={
+                theme
+                  ? {
+                      backgroundColor: theme.buttonBg,
+                      color: theme.buttonText,
+                      boxShadow: `0 4px 14px -3px ${theme.accentGlow}`,
+                    }
+                  : undefined
+              }
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl bg-cyan-500 px-4 py-2.5 text-xs font-bold text-slate-950 shadow-sm transition-all hover:brightness-110 active:scale-[0.99] sm:text-sm"
             >
               <Rocket className="h-4 w-4" />
               <span>Lancer l&apos;app</span>
@@ -140,15 +221,37 @@ export function ProjectCard({ project }: ProjectCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-4 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition-all hover:border-cyan-500/50 hover:bg-cyan-500/10 sm:text-sm"
+              style={
+                theme
+                  ? {
+                      borderColor: `${theme.accentColor}50`,
+                      backgroundColor: `${theme.accentColor}12`,
+                      color: theme.accentColor,
+                    }
+                  : undefined
+              }
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-4 py-2.5 text-xs font-semibold text-[var(--text-primary)] transition-all hover:bg-[var(--bg-surface-elevated)] sm:text-sm"
             >
-              <Code2 className="h-4 w-4 text-cyan-500" />
+              <Code2 className="h-4 w-4" />
               <span>Explorer le projet (Dev)</span>
               <ArrowUpRight className="h-4 w-4 ml-auto opacity-70" />
             </a>
           ) : (
-            <span className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-4 py-2.5 text-xs font-medium text-[var(--text-muted)] sm:text-sm select-none">
-              <Lock className="h-3.5 w-3.5 text-amber-500" />
+            <span
+              style={
+                theme
+                  ? {
+                      borderColor: `${theme.accentColor}30`,
+                      backgroundColor: `${theme.accentColor}0a`,
+                    }
+                  : undefined
+              }
+              className="inline-flex flex-1 items-center justify-center gap-2 rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-4 py-2.5 text-xs font-medium text-[var(--text-muted)] sm:text-sm select-none"
+            >
+              <Lock
+                style={theme ? { color: theme.accentColor } : undefined}
+                className="h-3.5 w-3.5 text-amber-500"
+              />
               <span>Build privé · Accès Beta</span>
             </span>
           )}
@@ -160,7 +263,12 @@ export function ProjectCard({ project }: ProjectCardProps) {
               rel="noopener noreferrer"
               aria-label={`Code source GitHub de ${project.title}`}
               title={`Voir le dépôt GitHub de ${project.title}`}
-              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-secondary)] transition-colors hover:border-cyan-500/40 hover:text-[var(--text-primary)]"
+              style={
+                isHovered && theme
+                  ? { borderColor: `${theme.accentColor}60`, color: theme.accentColor }
+                  : undefined
+              }
+              className="inline-flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] text-[var(--text-secondary)] transition-colors hover:text-[var(--text-primary)]"
             >
               <GitHubIcon className="h-4 w-4" />
             </a>

@@ -55,7 +55,7 @@ export function ProjectFilter({
                 onClick={() => onSelectCategory(category)}
                 className={`inline-flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-1.5 text-xs font-medium transition-all cursor-pointer ${
                   isSelected
-                    ? 'bg-cyan-500 text-slate-950 font-semibold shadow-sm shadow-cyan-500/25'
+                    ? 'bg-[var(--text-primary)] text-[var(--bg-canvas)] font-semibold shadow-xs'
                     : 'bg-[var(--bg-pill)] text-[var(--text-secondary)] hover:text-[var(--text-primary)]'
                 }`}
               >
@@ -63,7 +63,7 @@ export function ProjectFilter({
                 <span
                   className={`rounded-full px-1.5 py-0.2 font-mono-code text-[10px] ${
                     isSelected
-                      ? 'bg-slate-950/20 text-slate-950'
+                      ? 'bg-[var(--bg-canvas)]/25 text-[var(--bg-canvas)]'
                       : 'bg-[var(--bg-surface-elevated)] text-[var(--text-muted)]'
                   }`}
                 >
@@ -84,7 +84,7 @@ export function ProjectFilter({
             onChange={(e) => onSearchChange(e.target.value)}
             placeholder="Filtrer (stack, nom, tag)..."
             aria-label="Rechercher un projet ou une technologie"
-            className="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] py-2 pr-14 pl-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-cyan-500 focus:outline-none"
+            className="w-full rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] py-2 pr-14 pl-9 text-xs text-[var(--text-primary)] placeholder:text-[var(--text-muted)] focus:border-[var(--border-strong)] focus:outline-none"
           />
           {searchQuery ? (
             <button

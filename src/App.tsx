@@ -78,10 +78,10 @@ export function App() {
 
   return (
     <div className="relative min-h-dvh flex flex-col">
-      {/* Subtle Telemetry Grid Overlay */}
+      {/* Subtle Swiss Architectural Grid Overlay */}
       <div
         aria-hidden="true"
-        className="bg-telemetry-grid pointer-events-none fixed inset-0 -z-10"
+        className="bg-swiss-grid pointer-events-none fixed inset-0 -z-10"
       />
 
       <Header
@@ -132,7 +132,7 @@ export function App() {
                     setSelectedCategory('Tous');
                     setSearchQuery('');
                   }}
-                  className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-cyan-500 px-3.5 py-2 text-xs font-bold text-slate-950 transition-colors hover:bg-cyan-400 cursor-pointer"
+                  className="mt-4 inline-flex items-center gap-1.5 rounded-xl bg-[var(--text-primary)] px-3.5 py-2 text-xs font-semibold text-[var(--bg-canvas)] transition-opacity hover:opacity-90 cursor-pointer"
                 >
                   <RotateCcw className="h-3.5 w-3.5" />
                   Réinitialiser les filtres

@@ -1,4 +1,4 @@
-import type { ProfileInfo, Project, ProjectCategory, ProjectIconName, ProjectStatus } from '../types/project';
+import type { ProfileInfo, Project, ProjectCategory, ProjectIconName, ProjectStatus, ProjectTheme } from '../types/project';
 
 /**
  * Helper minimaliste pour ajouter un nouveau projet en 3 lignes :
@@ -20,6 +20,7 @@ export function createProject(
     icon?: ProjectIconName;
     shortcutIndex?: number;
     highlight?: string;
+    theme?: ProjectTheme;
   } = {}
 ): Project {
   const slug =
@@ -46,6 +47,7 @@ export function createProject(
     icon: options.icon ?? 'Terminal',
     shortcutIndex: options.shortcutIndex,
     highlight: options.highlight,
+    theme: options.theme,
   };
 }
 
@@ -81,6 +83,17 @@ export const INITIAL_PROJECTS: Project[] = [
       icon: 'Waves',
       shortcutIndex: 1,
       highlight: 'PWA · Web Bluetooth & FIT Telemetry',
+      theme: {
+        accentColor: '#0ea5e9',
+        accentGlow: 'rgba(14, 165, 233, 0.22)',
+        surfaceTint: 'rgba(14, 165, 233, 0.05)',
+        surfaceBorder: 'rgba(14, 165, 233, 0.35)',
+        badgeBg: 'rgba(14, 165, 233, 0.12)',
+        badgeText: '#38bdf8',
+        buttonBg: '#0ea5e9',
+        buttonText: '#02121e',
+        pattern: 'waves',
+      },
     }
   ),
   createProject(
@@ -99,6 +112,17 @@ export const INITIAL_PROJECTS: Project[] = [
       icon: 'MapPinned',
       shortcutIndex: 2,
       highlight: 'Street View Engine · Communes Belges',
+      theme: {
+        accentColor: '#eab308',
+        accentGlow: 'rgba(234, 179, 8, 0.20)',
+        surfaceTint: 'rgba(234, 179, 8, 0.04)',
+        surfaceBorder: 'rgba(234, 179, 8, 0.35)',
+        badgeBg: 'rgba(234, 179, 8, 0.12)',
+        badgeText: '#fde047',
+        buttonBg: '#eab308',
+        buttonText: '#181202',
+        pattern: 'grid-map',
+      },
     }
   ),
   createProject(
@@ -115,6 +139,17 @@ export const INITIAL_PROJECTS: Project[] = [
       icon: 'PiggyBank',
       shortcutIndex: 3,
       highlight: 'Open Banking PSD2 · AI Categorization',
+      theme: {
+        accentColor: '#10b981',
+        accentGlow: 'rgba(16, 185, 129, 0.20)',
+        surfaceTint: 'rgba(16, 185, 129, 0.04)',
+        surfaceBorder: 'rgba(16, 185, 129, 0.32)',
+        badgeBg: 'rgba(16, 185, 129, 0.12)',
+        badgeText: '#34d399',
+        buttonBg: '#10b981',
+        buttonText: '#021811',
+        pattern: 'fintech',
+      },
     }
   ),
   createProject(
@@ -132,6 +167,17 @@ export const INITIAL_PROJECTS: Project[] = [
       icon: 'Radar',
       shortcutIndex: 4,
       highlight: 'Agentic Scraping · Extraction Structurée',
+      theme: {
+        accentColor: '#f59e0b',
+        accentGlow: 'rgba(245, 158, 11, 0.20)',
+        surfaceTint: 'rgba(245, 158, 11, 0.04)',
+        surfaceBorder: 'rgba(245, 158, 11, 0.32)',
+        badgeBg: 'rgba(245, 158, 11, 0.12)',
+        badgeText: '#fbbf24',
+        buttonBg: '#f59e0b',
+        buttonText: '#1c1001',
+        pattern: 'radar',
+      },
     }
   ),
   createProject(
@@ -149,6 +195,17 @@ export const INITIAL_PROJECTS: Project[] = [
       icon: 'Bike',
       shortcutIndex: 5,
       highlight: 'Comptage Trafic · Mobilité Douce',
+      theme: {
+        accentColor: '#22c55e',
+        accentGlow: 'rgba(34, 197, 94, 0.20)',
+        surfaceTint: 'rgba(34, 197, 94, 0.04)',
+        surfaceBorder: 'rgba(34, 197, 94, 0.32)',
+        badgeBg: 'rgba(34, 197, 94, 0.12)',
+        badgeText: '#4ade80',
+        buttonBg: '#22c55e',
+        buttonText: '#03190a',
+        pattern: 'mobility',
+      },
     }
   ),
 ];

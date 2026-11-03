@@ -67,34 +67,34 @@ export function Header({ liveProjects, onOpenCommandPalette }: HeaderProps) {
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--border-subtle)] bg-[var(--bg-surface)] backdrop-blur-xl">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6">
-        {/* Brand Identity */}
+        {/* Brand Identity - Swiss Architectural Monogram */}
         <a
           href="#top"
-          className="group flex items-center gap-2.5 rounded-xl py-1 pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-cyan-400"
+          className="group flex items-center gap-2.5 rounded-xl py-1 pr-2 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-400"
         >
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-500/30 bg-cyan-500/10 text-cyan-400 shadow-xs transition-transform group-hover:scale-105">
+          <span className="flex h-9 w-9 items-center justify-center rounded-xl border border-[var(--border-strong)] bg-[var(--bg-pill)] text-[var(--text-primary)] shadow-xs transition-transform group-hover:scale-105">
             <Terminal className="h-4 w-4" />
           </span>
           <div className="flex flex-col">
-            <div className="flex items-center gap-1.5">
+            <div className="flex items-center gap-2">
               <span className="font-display text-sm font-bold tracking-tight text-[var(--text-primary)]">
-                charles<span className="text-cyan-500">.dev</span>
+                charles<span className="text-[var(--text-muted)] font-normal">.dev</span>
               </span>
-              <span className="inline-flex items-center gap-1 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-1.5 py-0.5 font-mono-code text-[10px] font-medium text-emerald-500">
+              <span className="inline-flex items-center gap-1 rounded-full border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2 py-0.5 font-mono-code text-[10px] font-medium text-[var(--text-secondary)]">
                 <span className="h-1.5 w-1.5 rounded-full bg-emerald-500 animate-pulse" />
                 HUB
               </span>
             </div>
             <span className="hidden font-mono-code text-[11px] text-[var(--text-muted)] sm:inline">
-              App Launcher &amp; Engineering Portal
+              Engineering &amp; App Launcher
             </span>
           </div>
         </a>
 
-        {/* Quick 1-Tap Dock for Live Production Apps */}
-        <div className="flex items-center gap-1.5 overflow-x-auto py-0.5">
+        {/* Quick 1-Tap Dock for Live Production Apps with target brand accents */}
+        <div className="flex items-center gap-2 overflow-x-auto py-0.5">
           <span className="mr-1 hidden font-mono-code text-[11px] uppercase tracking-wider text-[var(--text-muted)] lg:inline">
-            Accès 1-clic :
+            Direct :
           </span>
           {liveProjects.map((project) => (
             <a
@@ -103,11 +103,22 @@ export function Header({ liveProjects, onOpenCommandPalette }: HeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               title={`Lancer ${project.title} (${project.url})`}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2.5 py-1.5 text-xs font-medium text-[var(--text-primary)] transition-all hover:border-cyan-500/50 hover:bg-cyan-500/10 active:scale-95"
+              style={
+                project.theme
+                  ? {
+                      borderColor: `${project.theme.accentColor}35`,
+                    }
+                  : undefined
+              }
+              className="inline-flex items-center gap-1.5 rounded-lg border bg-[var(--bg-pill)] px-2.5 py-1.5 text-xs font-medium text-[var(--text-primary)] transition-all hover:bg-[var(--bg-surface-elevated)] active:scale-95"
             >
-              <ProjectIcon name={project.icon} className="h-3.5 w-3.5 text-cyan-500" />
-              <span>{project.title}</span>
-              <ExternalLink className="h-3 w-3 opacity-60" />
+              <ProjectIcon
+                name={project.icon}
+                style={project.theme ? { color: project.theme.accentColor } : undefined}
+                className="h-3.5 w-3.5"
+              />
+              <span className="font-semibold">{project.title}</span>
+              <ExternalLink className="h-3 w-3 opacity-50" />
             </a>
           ))}
         </div>
@@ -117,10 +128,10 @@ export function Header({ liveProjects, onOpenCommandPalette }: HeaderProps) {
           <button
             type="button"
             onClick={onOpenCommandPalette}
-            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2.5 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-cyan-500/40 hover:text-[var(--text-primary)] cursor-pointer"
+            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] px-2.5 py-1.5 text-xs font-medium text-[var(--text-secondary)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] cursor-pointer"
             aria-label="Ouvrir le lanceur rapide (Cmd+K)"
           >
-            <Command className="h-3.5 w-3.5 text-cyan-500" />
+            <Command className="h-3.5 w-3.5" />
             <span className="hidden sm:inline">Launcher</span>
             <kbd className="rounded border border-[var(--border-subtle)] bg-[var(--bg-surface-elevated)] px-1.5 py-0.5 font-mono-code text-[10px] text-[var(--text-muted)]">
               ⌘K
@@ -130,11 +141,11 @@ export function Header({ liveProjects, onOpenCommandPalette }: HeaderProps) {
           <button
             type="button"
             onClick={handleToggleColorScheme}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-secondary)] transition-colors hover:border-cyan-500/40 hover:text-[var(--text-primary)] cursor-pointer"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-secondary)] transition-colors hover:border-[var(--border-strong)] hover:text-[var(--text-primary)] cursor-pointer"
             aria-label={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
             title={isDark ? 'Passer en mode clair' : 'Passer en mode sombre'}
           >
-            {isDark ? <Sun className="h-4 w-4 text-amber-400" /> : <Moon className="h-4 w-4 text-sky-600" />}
+            {isDark ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
           </button>
         </div>
       </div>

@@ -142,7 +142,7 @@ export function CommandPalette({
 
       {/* Search Header */}
       <div className="flex items-center gap-3 border-b border-[var(--border-subtle)] px-4 py-3.5">
-        <Search className="h-4 w-4 shrink-0 text-cyan-500" />
+        <Search className="h-4 w-4 shrink-0 text-[var(--text-muted)]" />
         <input
           ref={inputRef}
           type="search"
@@ -187,14 +187,34 @@ export function CommandPalette({
                     onMouseEnter={() => setActiveIndex(idx)}
                     onClick={() => handleTriggerProject(project)}
                     disabled={!targetUrl}
+                    style={
+                      isSelected && project.theme
+                        ? {
+                            backgroundColor: `${project.theme.accentColor}18`,
+                          }
+                        : undefined
+                    }
                     className={`flex w-full items-center justify-between gap-3 rounded-xl px-3 py-2.5 text-left transition-colors cursor-pointer disabled:cursor-not-allowed disabled:opacity-60 ${
-                      isSelected
-                        ? 'bg-cyan-500/15 text-[var(--text-primary)]'
+                      isSelected && !project.theme
+                        ? 'bg-[var(--bg-pill)] text-[var(--text-primary)]'
+                        : isSelected
+                        ? 'text-[var(--text-primary)]'
                         : 'hover:bg-[var(--bg-pill)]'
                     }`}
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] text-cyan-500">
+                      <span
+                        style={
+                          project.theme
+                            ? {
+                                borderColor: `${project.theme.accentColor}40`,
+                                backgroundColor: `${project.theme.accentColor}15`,
+                                color: project.theme.accentColor,
+                              }
+                            : undefined
+                        }
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-xl border border-[var(--border-subtle)] bg-[var(--bg-pill)] text-[var(--text-primary)]"
+                      >
                         <ProjectIcon name={project.icon} className="h-4 w-4" />
                       </span>
                       <div className="min-w-0">
@@ -213,9 +233,12 @@ export function CommandPalette({
                       </div>
                     </div>
 
-                    <div className="flex shrink-0 items-center gap-2 font-mono-code text-xs text-cyan-500">
+                    <div
+                      style={project.theme ? { color: project.theme.accentColor } : undefined}
+                      className="flex shrink-0 items-center gap-2 font-mono-code text-xs text-[var(--text-secondary)]"
+                    >
                       {project.url ? (
-                        <span className="inline-flex items-center gap-1">
+                        <span className="inline-flex items-center gap-1 font-semibold">
                           Ouvrir <ArrowUpRight className="h-3.5 w-3.5" />
                         </span>
                       ) : project.githubUrl ? (
@@ -248,7 +271,7 @@ export function CommandPalette({
           href={profile.socials.github}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-cyan-500"
+          className="inline-flex items-center gap-1 text-[var(--text-secondary)] hover:text-[var(--text-primary)]"
         >
           <GitHubIcon className="h-3 w-3" /> GitHub
         </a>

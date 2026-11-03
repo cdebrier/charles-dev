@@ -27,6 +27,25 @@ export type ProjectIconName =
   | 'Globe'
   | 'Database';
 
+export type ProjectThemePattern =
+  | 'waves'
+  | 'grid-map'
+  | 'fintech'
+  | 'radar'
+  | 'mobility';
+
+export interface ProjectTheme {
+  accentColor: string;
+  accentGlow: string;
+  surfaceTint: string;
+  surfaceBorder: string;
+  badgeBg: string;
+  badgeText: string;
+  buttonBg: string;
+  buttonText: string;
+  pattern: ProjectThemePattern;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -45,6 +64,8 @@ export interface Project {
   shortcutIndex?: number;
   /** Point fort / métrique clé affichée dans le Bento */
   highlight?: string;
+  /** Thème et charte graphique personnalisée de l'application */
+  theme?: ProjectTheme;
 }
 
 export interface ProfileInfo {
