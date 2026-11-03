@@ -1,6 +1,5 @@
-import { ArrowUpRight, Trees } from 'lucide-react';
+import { Lock, Trees } from 'lucide-react';
 import type { Project } from '../../types/project';
-import { GitHubIcon } from '../BrandIcons';
 
 interface AppCardProps {
   project: Project;
@@ -60,41 +59,20 @@ export function VigilXLCard({ project }: AppCardProps) {
       </div>
 
       {/* Footer */}
-      <div className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {project.techStack.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded bg-slate-100 px-2 py-0.5 font-mono-code text-[10px] text-slate-600"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
+        <span className="font-mono-code text-[11px] text-slate-500">
+          Agent IA &amp; Scraping
+        </span>
 
         <div className="flex items-center gap-2 shrink-0">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Code source GitHub"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 hover:text-[#008784] hover:border-[#008784] transition-colors"
-            >
-              <GitHubIcon className="h-3.5 w-3.5" />
-            </a>
-          )}
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#008784] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#00706d] transition-colors"
-            >
-              <span>Consulter</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
-            </a>
-          )}
+          <a
+            href="mailto:charlesdebrier@gmail.com?subject=Code%20VigilXL%20-%20Demande%20d'acc%C3%A8s%20recruteur"
+            title="Dépôt privé — Demander un accès invité au code"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-[#008784]/30 bg-teal-50 px-2.5 py-1 text-[11px] font-medium text-[#008784] hover:bg-teal-100 transition-colors cursor-pointer"
+          >
+            <Lock className="h-3 w-3 text-[#008784]" />
+            <span>Code sur demande</span>
+          </a>
         </div>
       </div>
     </article>

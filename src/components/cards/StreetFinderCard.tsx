@@ -69,17 +69,10 @@ export function StreetFinderCard({ project }: AppCardProps) {
       </div>
 
       {/* Footer */}
-      <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {project.techStack.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded bg-white/5 px-2 py-0.5 font-mono-code text-[10px] text-zinc-400"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
+        <span className="font-mono-code text-[11px] text-zinc-400">
+          streetfinder.be
+        </span>
 
         <div className="flex items-center gap-2 shrink-0">
           {project.githubUrl && (
@@ -97,7 +90,7 @@ export function StreetFinderCard({ project }: AppCardProps) {
             href={project.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 rounded-lg bg-[#F3DE2C] px-3 py-1.5 text-xs font-bold text-slate-950 hover:bg-[#e2ce23] transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-lg bg-[#F3DE2C] px-3.5 py-1.5 text-xs font-bold text-slate-950 hover:bg-[#e2ce23] transition-colors"
           >
             <span>Jouer</span>
             <ArrowUpRight className="h-3.5 w-3.5" />

@@ -52,7 +52,7 @@ export function createProject(
 }
 
 export const PROFILE_DATA: ProfileInfo = {
-  name: 'Charles De Brier',
+  name: 'Charles de Brier',
   handle: 'charles.dev',
   role: 'Ingénieur · Data Scientist & AI Engineer',
   tagline: 'Architecte d’outils intelligents, d’applications web temps réel et de systèmes orientés données.',
@@ -112,7 +112,7 @@ export const INITIAL_PROJECTS: Project[] = [
       id: 'streetfinder',
       slug: 'streetfinder',
       url: 'https://streetfinder.be',
-      githubUrl: 'https://github.com/cdebrier/streetfinder',
+      githubUrl: 'https://github.com/cdebrier/GeoRix',
       status: 'Live',
       category: 'Mobilité',
       categoryLabel: 'Jeu Géo / Communes Belges',
@@ -185,7 +185,6 @@ export const INITIAL_PROJECTS: Project[] = [
     {
       id: 'vigilxl',
       slug: 'vigilxl',
-      githubUrl: 'https://github.com/cdebrier/vigilxl',
       status: 'Private/Dev',
       category: 'Data/IA',
       categoryLabel: 'Veille & Subsides / Ixelles',
@@ -221,7 +220,7 @@ export const INITIAL_PROJECTS: Project[] = [
     {
       id: 'telraam',
       slug: 'telraam',
-      githubUrl: 'https://github.com/cdebrier/telraam-analytics',
+      githubUrl: 'https://github.com/cdebrier/Telraam',
       status: 'Private/Dev',
       category: 'Mobilité',
       categoryLabel: 'Observatoire Mobilité / Rixensart',

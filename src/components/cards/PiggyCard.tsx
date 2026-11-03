@@ -1,6 +1,5 @@
 import { Lock } from 'lucide-react';
 import type { Project } from '../../types/project';
-import { GitHubIcon } from '../BrandIcons';
 
 interface AppCardProps {
   project: Project;
@@ -73,34 +72,20 @@ export function PiggyCard({ project }: AppCardProps) {
       </div>
 
       {/* Footer */}
-      <div className="mt-5 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {project.techStack.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded bg-white/5 px-2 py-0.5 font-mono-code text-[10px] text-zinc-400"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      <div className="mt-4 pt-3 border-t border-white/10 flex items-center justify-between gap-3">
+        <span className="font-mono-code text-[11px] text-zinc-400">
+          Mobile · Expo
+        </span>
 
         <div className="flex items-center gap-2 shrink-0">
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="Code source GitHub"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-white/10 bg-white/5 text-zinc-400 hover:text-white hover:border-white/20 transition-colors"
-            >
-              <GitHubIcon className="h-3.5 w-3.5" />
-            </a>
-          )}
-          <span className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-[11px] text-zinc-400">
+          <a
+            href="mailto:charlesdebrier@gmail.com?subject=Code%20Piggy%20-%20Demande%20d'acc%C3%A8s%20recruteur"
+            title="Dépôt privé — Demander un accès invité au code"
+            className="inline-flex items-center gap-1.5 rounded-lg border border-emerald-500/30 bg-emerald-500/10 px-2.5 py-1 text-[11px] font-medium text-emerald-300 hover:bg-emerald-500/20 hover:border-emerald-500/50 transition-colors cursor-pointer"
+          >
             <Lock className="h-3 w-3 text-amber-400" />
-            <span>Expo</span>
-          </span>
+            <span>Code sur demande</span>
+          </a>
         </div>
       </div>
     </article>

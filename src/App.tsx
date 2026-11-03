@@ -1,13 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from 'react';
-import { FolderSearch, RotateCcw } from 'lucide-react';
+import { useEffect, useMemo, useState } from 'react';
 import { CommandPalette } from './components/CommandPalette';
 import { Footer } from './components/Footer';
 import { Header } from './components/Header';
 import { Hero } from './components/Hero';
 import { ProjectCard } from './components/ProjectCard';
-import { ProjectFilter } from './components/ProjectFilter';
 import { projectService } from './services/projectService';
-import type { FilterCategory, Project } from './types/project';
+import type { Project } from './types/project';
 
 export function App() {
   const [projects] = useState<Project[]>(() =>
@@ -15,20 +13,9 @@ export function App() {
   );
   const profile = useMemo(() => projectService.getProfileSync(), []);
 
-  const [selectedCategory, setSelectedCategory] =
-    useState<FilterCategory>('Tous');
-  const [searchQuery, setSearchQuery] = useState('');
   const [isCommandPaletteOpen, setIsCommandPaletteOpen] = useState(false);
 
-  const searchInputRef = useRef<HTMLInputElement | null>(null);
-
-  const filteredProjects = useMemo(
-    () =>
-      projectService.filterProjects(projects, selectedCategory, searchQuery),
-    [projects, selectedCategory, searchQuery]
-  );
-
-  // Global keyboard shortcuts: Cmd+K / Ctrl+K, '/', and '1'..'5' quick launch
+  // Global keyboard shortcuts: Cmd+K / Ctrl+K and '1'..'5' quick launch
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
       if ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === 'k') {
@@ -44,12 +31,6 @@ export function App() {
         target?.isContentEditable;
 
       if (isTyping || isCommandPaletteOpen) return;
-
-      if (event.key === '/') {
-        event.preventDefault();
-        searchInputRef.current?.focus();
-        return;
-      }
 
       // Direct numeric shortcut 1-9 to launch app in 1 keystroke
       if (
@@ -86,9 +67,9 @@ export function App() {
       <main className="flex-1">
         <Hero profile={profile} projects={projects} />
 
-        <section aria-labelledby="launcher-heading" className="pb-12">
-          <div className="mx-auto max-w-5xl px-4 pb-2 sm:px-6">
-            <div className="flex items-center justify-between">
+        <section aria-labelledby="launcher-heading" className="pb-16">
+          <div className="mx-auto max-w-5xl px-4 pb-4 sm:px-6">
+            <div className="flex items-center justify-between border-b border-[var(--border-subtle)] pb-3">
               <h2
                 id="launcher-heading"
                 className="font-mono-code text-xs font-medium uppercase tracking-wider text-[var(--text-muted)]"
@@ -101,44 +82,12 @@ export function App() {
             </div>
           </div>
 
-          <ProjectFilter
-            projects={projects}
-            selectedCategory={selectedCategory}
-            onSelectCategory={setSelectedCategory}
-            searchQuery={searchQuery}
-            onSearchChange={setSearchQuery}
-            searchInputRef={searchInputRef}
-          />
-
-          <div className="mx-auto max-w-5xl px-4 pt-2 sm:px-6">
-            {filteredProjects.length === 0 ? (
-              <div className="surface-card flex flex-col items-center justify-center rounded-2xl p-12 text-center">
-                <FolderSearch className="h-10 w-10 text-zinc-400" />
-                <h3 className="font-display mt-3 text-base font-semibold text-[var(--text-primary)]">
-                  Aucun projet ne correspond à ces filtres
-                </h3>
-                <p className="mt-1 text-xs text-[var(--text-secondary)]">
-                  Essayez une autre catégorie ou réinitialisez la recherche.
-                </p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    setSelectedCategory('Tous');
-                    setSearchQuery('');
-                  }}
-                  className="mt-4 inline-flex items-center gap-1.5 rounded-lg bg-[var(--text-primary)] px-3 py-1.5 text-xs font-medium text-[var(--bg-canvas)] transition-opacity hover:opacity-90 cursor-pointer"
-                >
-                  <RotateCcw className="h-3.5 w-3.5" />
-                  Réinitialiser les filtres
-                </button>
-              </div>
-            ) : (
-              <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-                {filteredProjects.map((project) => (
-                  <ProjectCard key={project.id} project={project} />
-                ))}
-              </div>
-            )}
+          <div className="mx-auto max-w-5xl px-4 sm:px-6">
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {projects.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </div>
           </div>
         </section>
       </main>

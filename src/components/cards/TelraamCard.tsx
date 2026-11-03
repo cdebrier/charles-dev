@@ -73,17 +73,10 @@ export function TelraamCard({ project }: AppCardProps) {
       </div>
 
       {/* Footer */}
-      <div className="mt-5 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
-        <div className="flex flex-wrap gap-1.5">
-          {project.techStack.slice(0, 3).map((tech) => (
-            <span
-              key={tech}
-              className="rounded bg-slate-100 px-2 py-0.5 font-mono-code text-[10px] text-slate-600"
-            >
-              {tech}
-            </span>
-          ))}
-        </div>
+      <div className="mt-4 pt-3 border-t border-slate-200 flex items-center justify-between gap-3">
+        <span className="font-mono-code text-[11px] text-slate-500">
+          Analytics &amp; Capteurs S2
+        </span>
 
         <div className="flex items-center gap-2 shrink-0">
           {project.githubUrl && (
@@ -91,21 +84,11 @@ export function TelraamCard({ project }: AppCardProps) {
               href={project.githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="Code source GitHub"
-              className="flex h-8 w-8 items-center justify-center rounded-lg border border-slate-300 bg-white text-slate-700 hover:text-[#0d9488] hover:border-[#0d9488] transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-[#0d9488] px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-[#0f766e] transition-colors"
             >
               <GitHubIcon className="h-3.5 w-3.5" />
-            </a>
-          )}
-          {project.githubUrl && (
-            <a
-              href={project.githubUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 rounded-lg bg-[#0d9488] px-3 py-1.5 text-xs font-semibold text-white hover:bg-[#0f766e] transition-colors"
-            >
-              <span>Consulter</span>
-              <ArrowUpRight className="h-3.5 w-3.5" />
+              <span>Dépôt GitHub</span>
+              <ArrowUpRight className="h-3.5 w-3.5 opacity-70" />
             </a>
           )}
         </div>

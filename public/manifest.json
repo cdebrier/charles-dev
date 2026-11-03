@@ -1,7 +1,7 @@
 {
   "name": "Charles.dev — App Launcher & Hub",
   "short_name": "Charles.dev",
-  "description": "Portail personnel et lanceur d'applications de Charles De Brier (Ingénieur, Data Scientist & AI Engineer).",
+  "description": "Portail personnel et lanceur d'applications de Charles de Brier (Ingénieur, Data Scientist & AI Engineer).",
   "start_url": "/",
   "scope": "/",
   "display": "standalone",
